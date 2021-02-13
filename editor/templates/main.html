@@ -27,14 +27,19 @@
                     </a>
                 </div>
 
-                {% comment %} {% if user.is_authenticated %} {% endcomment %}
+                {% if user.is_authenticated %}
                     <div class="ml-auto" id="menu">
                         <a class="mr-3 orange" href={% url 'products:books_list' %}>Livres</a>
                         <a class="mr-3 orange" href="">CD</a>
                         <a class="mr-3 orange" href="">Images</a>
-                        <a class="ml-5" href=""><span class="fas fa-plug" title="Déconnexion"></span></a>
+                        <a class="ml-3" href={% url 'accounts:logout' %}><span class="fas fa-plug" title="Déconnexion"></span></a>
+                        {% if user.is_superuser %}
+                            <a class="ml-3" href={% url 'admin:index' %}><span class="fas fa-tools" title="Admin"></span></a>
+                        {% endif %}
                     </div>
-                {% comment %} {% endif %} {% endcomment %}
+                {% else %}
+                    <a class="ml-auto btn btn-primary" href={% url 'accounts:login' %}>Connexion</a>
+                {% endif %}
             </div>
         </nav>
         
