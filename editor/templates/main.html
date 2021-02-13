@@ -29,10 +29,10 @@
 
                 {% comment %} {% if user.is_authenticated %} {% endcomment %}
                     <div class="ml-auto" id="menu">
-                        <a class="mr-3" href={% url 'products:books_list' %}>Livres</a>
-                        <a class="mr-3" href="">CD</a>
-                        <a class="mr-3" href="">Images</a>
-                        <a class="ml-5" href="">Déconnexion</a>
+                        <a class="mr-3 orange" href={% url 'products:books_list' %}>Livres</a>
+                        <a class="mr-3 orange" href="">CD</a>
+                        <a class="mr-3 orange" href="">Images</a>
+                        <a class="ml-5" href=""><span class="fas fa-plug" title="Déconnexion"></span></a>
                     </div>
                 {% comment %} {% endif %} {% endcomment %}
             </div>
