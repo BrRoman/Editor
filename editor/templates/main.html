@@ -27,19 +27,25 @@
                     </a>
                 </div>
 
-                {% if user.is_authenticated %}
-                    <div class="ml-auto" id="menu">
-                        <a class="mr-3" href={% url 'products:books_list' %}>Livres</a>
-                        <a class="mr-3" href={% url 'products:disks_list' %}>CD</a>
-                        <a class="mr-3" href={% url 'products:images_list' %}>Images</a>
+                <div class="ml-auto" id="menu">
+                    <a class="mr-3" href={% url 'products:books_list' %}>Livres</a>
+                    <a class="mr-3" href={% url 'products:disks_list' %}>CD</a>
+                    <a class="mr-3" href={% url 'products:images_list' %}>Images</a>
+
+                    {% if user.is_authenticated %}
                         {% if user.is_superuser %}
                             <a class="ml-3" href={% url 'admin:index' %}><span class="fas fa-tools orange" title="Admin"></span></a>
                         {% endif %}
-                        <a class="ml-3" href={% url 'accounts:logout' %}><span class="fas fa-sign-out-alt orange" title="Déconnexion"></span></a>
-                    </div>
-                {% else %}
-                    <a class="ml-auto btn btn-primary" href={% url 'accounts:login' %}>Connexion</a>
-                {% endif %}
+
+                        <a class="ml-3" href={% url 'accounts:logout' %}>
+                            <span class="fas fa-sign-out-alt orange" title="Déconnexion"></span>
+                        </a>
+                    {% else %}
+                        <a class="ml-3" href={% url 'accounts:login' %}>
+                            <span class="fas fa-sign-in-alt orange" title="Connexion"></span>
+                        </a>
+                    {% endif %}
+                </div>
             </div>
         </nav>
         
