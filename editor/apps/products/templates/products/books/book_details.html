@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'products:books_list' %}>Livres</a></li>
+    <li class="breadcrumb-item active">{{ book }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h4>Détails du livre {{ book }}</h4>
+
+    Réf. TM = {{ book.ref_tm }}
+{% endblock content %}

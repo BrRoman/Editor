@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'products:disks_list' %}>CD</a></li>
+    <li class="breadcrumb-item active">{{ disk }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h4>Détails du CD {{ disk }}</h4>
+
+    Réf. TM = {{ disk.ref_tm }}
+{% endblock content %}

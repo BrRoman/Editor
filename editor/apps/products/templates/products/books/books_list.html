@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Livres</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h4>Livres</h4>
+
+    <div class="col-6">
+        <table class="table table-sm table-bordered">
+            {% for book in books %}
+                <tr>
+                    <td>{{ book }}</td>
+                    <td><a href={% url 'products:book_details' book.pk %}><span class="fas fa-eye" title="Voir les détails"></span></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock content %}
