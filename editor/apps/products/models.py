@@ -43,4 +43,12 @@ class Product(models.Model):
         db_table = 'Objets'
 
     def __str__(self):
-        return '{}: {}'.format(self.ref_tm, self.title)
+        designation = ''
+        if self.category == 'book':
+            designation = '{}: {}'.format(self.ref_tm, self.title)
+        elif self.category == 'disk':
+            designation = '{}: {} ({})'.format(
+                self.ref_tm, self.title, self.interprete)
+        elif self.category == 'image':
+            designation = '{} / {}'.format(self.recto_img, self.verso_img)
+        return designation
