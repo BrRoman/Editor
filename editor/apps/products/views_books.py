@@ -7,7 +7,8 @@ from .models import Product
 
 def books_list(request):
     """ List of books. """
-    books = Product.objects.filter(ref_tm__icontains='L11')
+    books = Product.objects.filter(
+        category='book').order_by('ref_tm', 'ean', 'title')
     return render(
         request,
         'products/books/books_list.html',

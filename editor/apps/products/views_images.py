@@ -7,7 +7,8 @@ from .models import Product
 
 def images_list(request):
     """ List of images. """
-    images = Product.objects.filter(ref_tm__icontains='CP')
+    images = Product.objects.filter(category='image').order_by(
+        'ref_tm', 'ean', 'recto_img', 'verso_img')
     return render(
         request,
         'products/images/images_list.html',
