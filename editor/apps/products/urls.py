@@ -13,7 +13,10 @@ urlpatterns = [
 
     # Books:
     path('books/', views_books.books_list, name='books_list'),
+    path('books/create/', views_books.book_create, name='book_create'),
     path('books/<int:pk>/', views_books.book_details, name='book_details'),
+    path('books/<int:pk>/update/', views_books.book_update, name='book_update'),
+    path('books/<int:pk>/delete/', views_books.book_delete, name='book_delete'),
 
     # Disks:
     path('disks/', views_disks.disks_list, name='disks_list'),

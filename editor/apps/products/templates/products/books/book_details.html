@@ -6,7 +6,12 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <h4>Détails du livre {{ book }}</h4>
+    <h2 class="mb-4 green font-weight-bold text-center">{{ book }}</h2>
 
-    Réf. TM = {{ book.ref_tm }}
+    {% if user.is_authenticated %}
+        <a href={% url 'products:book_update' book.id %}>Modifier ce livre</a>
+        <a href={% url 'products:book_delete' book.id %}>Supprimer ce livre</a>
+    {% endif %}
+    
+    <a href={% url 'products:books_list' %}>Retour à la liste des livres</a>
 {% endblock content %}
