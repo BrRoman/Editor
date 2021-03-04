@@ -17,4 +17,16 @@
             <p>Images</p>
         </a>
     </div>
+
+    <div class="mt-5">
+        {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+                <small class="fs-6">Vous êtes connecté en tant que <span class="font-weight-bold">{{ user }}</span> (superuser).</small>
+            {% else %}
+                <small class="fs-6">Vous êtes connecté en tant que <span class="font-weight-bold">{{ user }}</span>.</small>
+            {% endif %}
+        {% else %}
+            <small class="fs-6">Vous n'êtes pas connecté.</small>
+        {% endif %}
+    </div>
 {% endblock content %}
