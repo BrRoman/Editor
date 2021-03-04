@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'products:images_list' %}>Images</a></li>
+
+    {% if image %}
+        <li class="breadcrumb-item"><a href={% url 'products:image_details' image.id %}>{{ image }}</a></li>
+        <li class="breadcrumb-item active">Modifier</li>
+    {% else %}
+        <li class="breadcrumb-item active">Créer</li>
+    {% endif %}
+{% endblock breadcrumbs %}
+
+{% block content %}
+    {% if image %}
+        <h2 class="mb-4 green font-weight-bold">Modifier une image</h2>
+    {% else %}
+        <h2 class="mb-4 green font-weight-bold">Créer une nouvelle image</h2>
+    {% endif %}
+{% endblock content %}

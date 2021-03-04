@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'products:disks_list' %}>CD</a></li>
+
+    {% if disk %}
+        <li class="breadcrumb-item"><a href={% url 'products:disk_details' disk.id %}>{{ disk }}</a></li>
+        <li class="breadcrumb-item active">Modifier</li>
+    {% else %}
+        <li class="breadcrumb-item active">Créer</li>
+    {% endif %}
+{% endblock breadcrumbs %}
+
+{% block content %}
+    {% if disk %}
+        <h2 class="mb-4 green font-weight-bold">Modifier un CD</h2>
+    {% else %}
+        <h2 class="mb-4 green font-weight-bold">Créer un nouveau CD</h2>
+    {% endif %}
+{% endblock content %}

@@ -20,9 +20,15 @@ urlpatterns = [
 
     # Disks:
     path('disks/', views_disks.disks_list, name='disks_list'),
-    path('disk/<int:pk>/', views_disks.disk_details, name='disk_details'),
+    path('disks/create/', views_disks.disk_create, name='disk_create'),
+    path('disks/<int:pk>/', views_disks.disk_details, name='disk_details'),
+    path('disks/<int:pk>/update/', views_disks.disk_update, name='disk_update'),
+    path('disks/<int:pk>/delete/', views_disks.disk_delete, name='disk_delete'),
 
     # Images:
     path('images/', views_images.images_list, name='images_list'),
-    path('image/<int:pk>/', views_images.image_details, name='image_details'),
+    path('images/create/', views_images.image_create, name='image_create'),
+    path('images/<int:pk>/', views_images.image_details, name='image_details'),
+    path('images/<int:pk>/update/', views_images.image_update, name='image_update'),
+    path('images/<int:pk>/delete/', views_images.image_delete, name='image_delete'),
 ]

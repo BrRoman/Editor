@@ -12,7 +12,7 @@ def books_list(request):
         category='book').order_by('ref_tm', 'ean', 'title')
     return render(
         request,
-        'products/books/books_list.html',
+        'products/books/list.html',
         {
             'books': books
         }
@@ -30,7 +30,7 @@ def book_details(request, **kwargs):
     book = get_object_or_404(Product, pk=kwargs['pk'])
     return render(
         request,
-        'products/books/book_details.html',
+        'products/books/details.html',
         {
             'book': book,
         },

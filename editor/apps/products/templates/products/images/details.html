@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'products:images_list' %}>Images</a></li>
+    <li class="breadcrumb-item active">{{ image }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h2 class="mb-4 green font-weight-bold text-center">{{ image }}</h2>
+
+    {% if user.is_authenticated %}
+        <a href={% url 'products:image_update' image.id %}>Modifier cette image</a>
+        <a href={% url 'products:image_delete' image.id %}>Supprimer cette image</a>
+    {% endif %}
+    
+    <a href={% url 'products:images_list' %}>Retour à la liste des images</a>
+{% endblock content %}

@@ -8,7 +8,11 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <h4>Images</h4>
+    <h2 class="mb-4 green font-weight-bold">Images</h2>
+
+    {% if user.is_authenticated %}
+        <a href={% url 'products:image_create' %} class="mb-3">Créer une nouvelle image</a>
+    {% endif %}
 
     <div class="col-6">
         <table class="table table-sm table-bordered">
