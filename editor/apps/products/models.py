@@ -45,10 +45,39 @@ class Product(models.Model):
     def __str__(self):
         designation = ''
         if self.category == 'book':
-            designation = '{}: {}'.format(self.ref_tm, self.title)
+            if self.ref_tm:
+                designation += self.ref_tm
+            if self.title:
+                if self.ref_tm:
+                    designation += ' - '
+                designation += self.title
+            if self.sub_title:
+                if self.title:
+                    designation += ' '
+                designation += '({})'.format(self.sub_title)
+
         elif self.category == 'disk':
-            designation = '{}: {} ({})'.format(
-                self.ref_tm, self.title, self.interprete)
+            if self.ref_tm:
+                designation += self.ref_tm
+            if self.title:
+                if self.ref_tm:
+                    designation += ' - '
+                designation += self.title
+            if self.interprete:
+                if self.title:
+                    designation += ' '
+                designation += ', par {}'.format(self.interprete)
+
         elif self.category == 'image':
-            designation = '{} / {}'.format(self.recto_img, self.verso_img)
+            if self.ref_tm:
+                designation += self.ref_tm
+            if self.recto_img:
+                if self.ref_tm:
+                    designation += ' - '
+                designation += self.recto_img
+            if self.verso_img:
+                if self.recto_img:
+                    designation += ' '
+                designation += '/ {}'.format(self.verso_img)
+
         return designation
