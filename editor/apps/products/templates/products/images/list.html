@@ -14,11 +14,14 @@
         <a href={% url 'products:image_create' %} class="mb-3">Créer une nouvelle image</a>
     {% endif %}
 
-    <div class="col-6">
+    <div class="col-10">
         <table class="table table-sm table-bordered">
             {% for image in images %}
                 <tr>
-                    <td>{{ image }}</td>
+                    <td>{{ image.ref_tm|default_if_none:'' }}</td>
+                    <td>{{ image.ean|default_if_none:'' }}</td>
+                    <td>{{ image.recto_img|default_if_none:'' }}</td>
+                    <td>{{ image.verso_img|default_if_none:'' }}</td>
                     <td><a href={% url 'products:image_details' image.pk %}><span class="fas fa-eye" title="Voir les détails"></span></a></td>
                 </tr>
             {% endfor %}
