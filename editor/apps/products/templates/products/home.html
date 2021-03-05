@@ -18,15 +18,18 @@
         </a>
     </div>
 
-    <div class="mt-5">
+    <div class="mt-5 d-flex flex-column text-center">
         {% if user.is_authenticated %}
             {% if user.is_superuser %}
                 <small class="fs-6">Vous êtes connecté en tant que <span class="font-weight-bold">{{ user }}</span> (superuser).</small>
+                <small class="fs-6"><a href={% url 'accounts:logout' %}>Me déconnecter</a></small>
             {% else %}
                 <small class="fs-6">Vous êtes connecté en tant que <span class="font-weight-bold">{{ user }}</span>.</small>
+                <small class="fs-6"><a href={% url 'accounts:logout' %}>Me déconnecter</a></small>
             {% endif %}
         {% else %}
             <small class="fs-6">Vous n'êtes pas connecté.</small>
+                <small class="fs-6"><a href={% url 'accounts:login' %}>Me connecter</a></small>
         {% endif %}
     </div>
 {% endblock content %}
