@@ -25,10 +25,61 @@ class Product(models.Model):
         max_length=255,
         db_column='Sous_titre',
     )
+    author = models.CharField(
+        max_length=255,
+        db_column='Auteur',
+    )
     interprete = models.CharField(
         max_length=255,
         db_column='Interprete',
     )
+    collection = models.CharField(
+        max_length=255,
+        db_column='Collection_string',
+    )
+    number_in_collection = models.IntegerField(
+        db_column='Num_dans_collection',
+    )
+    circulation = models.DateField(
+        db_column='Chiffre_tirage',
+    )
+    publication = models.DateField(
+        db_column='Date_fin_tirage',
+    )
+    width = models.IntegerField(
+        db_column='Largeur',
+    )
+    height = models.IntegerField(
+        db_column='Hauteur',
+    )
+    number_of_pages = models.IntegerField(
+        db_column='Nb_pages',
+    )
+    weight = models.IntegerField(
+        db_column='Poids',
+    )
+    presentation_product = models.TextField(
+        db_column='Pres_objet',
+    )
+    presentation_author = models.TextField(
+        db_column='Pres_auteur',
+    )
+    strong_points = models.TextField(
+        db_column='Points_forts',
+    )
+    target_audience = models.TextField(
+        db_column='Public_vise',
+    )
+    price = models.FloatField(
+        db_column='Prix_public',
+    )
+    coefficient = models.FloatField(
+        db_column='Coefficient',
+    )
+    pght = models.FloatField(
+        db_column='PGHT',
+    )
+
     recto_img = models.CharField(
         max_length=255,
         db_column='Recto_img',
