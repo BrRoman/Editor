@@ -3,7 +3,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 
-from .models import Product
+from .models import Charge, Product
 
 
 def books_list(request):
@@ -28,11 +28,13 @@ def book_create(request):
 def book_details(request, **kwargs):
     """ Details of a book. """
     book = get_object_or_404(Product, pk=kwargs['pk'])
+    charges = Charge.objects.filter(product=book)
     return render(
         request,
         'products/books/details.html',
         {
             'book': book,
+            'charges': charges,
         },
     )
 

@@ -37,7 +37,12 @@
                     </tr>
                     <tr>
                         <td class="font-weight-bold col-3">Collection</td>
-                        <td>{{ book.collection|default_if_none:'' }}</td>
+                        <td>
+                            {{ book.collection.collection|default_if_none:''}}
+                            {% if book.collection %}
+                                (ISSN {{book.collection.issn|default_if_none:''}})
+                            {% endif %}
+                        </td>
                     </tr>
                     <tr>
                         <td class="font-weight-bold col-3">Numéro dans la collection</td>
@@ -88,6 +93,17 @@
                     <tr>
                         <td class="font-weight-bold col-3">Coefficient</td>
                         <td>{{ book.coefficient|default_if_none:'?' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Charges</td>
+                        <td id="charges">
+                            {% for charge in charges %}
+                                <div class="d-flex">
+                                    <p class="font-weight-bold col-6 form-text m-0 p-0">{{ charge.name }} :</p>
+                                    <p class="col-6 form-text m-0 p-0">{{ charge.amount }} €</p>
+                                </div>
+                            {% endfor %}
+                        </td>
                     </tr>
                 </table>
             </div>
