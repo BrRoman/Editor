@@ -22,7 +22,7 @@
                     <td>{{ disk.ean|default_if_none:'' }}</td>
                     <td>{{ disk.title|default_if_none:'' }}</td>
                     <td>{{ disk.sub_title|default_if_none:'' }}</td>
-                    <td>{{ disk.interprete|default_if_none:'' }}</td>
+                    <td>{{ disk.interpreter.name|default_if_none:'' }}</td>
                     <td><a href={% url 'products:disk_details' disk.pk %}><span class="fas fa-eye" title="Voir les détails"></span></a></td>
                 </tr>
             {% endfor %}
