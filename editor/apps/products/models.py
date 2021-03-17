@@ -29,13 +29,15 @@ class Product(models.Model):
         max_length=255,
         db_column='Auteur',
     )
-    interprete = models.CharField(
-        max_length=255,
-        db_column='Interprete',
+    interpreter = models.ForeignKey(
+        'Interpreter',
+        on_delete=models.CASCADE,
+        db_column='Interprete_CD',
     )
-    collection = models.CharField(
-        max_length=255,
-        db_column='Collection_string',
+    collection = models.ForeignKey(
+        'Collection',
+        on_delete=models.CASCADE,
+        db_column='Collection',
     )
     number_in_collection = models.IntegerField(
         db_column='Num_dans_collection',
@@ -114,10 +116,10 @@ class Product(models.Model):
                 if self.ref_tm:
                     designation += ' - '
                 designation += self.title
-            if self.interprete:
+            if self.interpreter:
                 if self.title:
                     designation += ' '
-                designation += ', par {}'.format(self.interprete)
+                designation += ', par {}'.format(self.interpreter.name)
 
         elif self.category == 'image':
             if self.ref_tm:
@@ -132,3 +134,51 @@ class Product(models.Model):
                 designation += '/ {}'.format(self.verso_img)
 
         return designation
+
+
+class Collection(models.Model):
+    """ Collection model. """
+    collection = models.CharField(
+        max_length=255,
+        db_column='Collection',
+    )
+    issn = models.CharField(
+        max_length=10,
+        db_column='ISSN',
+    )
+
+    class Meta:
+        managed = False
+        db_table = 'Collections'
+
+
+class Interpreter(models.Model):
+    """ Interpreter model. """
+    name = models.CharField(
+        max_length=50,
+        db_column='Interprete',
+    )
+
+    class Meta:
+        managed = False
+        db_table = 'Interpretes_CD'
+
+
+class Charge(models.Model):
+    """ Charge model. """
+    product = models.ForeignKey(
+        'Product',
+        on_delete=models.CASCADE,
+        db_column='ID_objet',
+    )
+    name = models.CharField(
+        max_length=50,
+        db_column='Charge'
+    )
+    amount = models.FloatField(
+        db_column='Montant',
+    )
+
+    class Meta:
+        managed = False
+        db_table = 'Charges'
