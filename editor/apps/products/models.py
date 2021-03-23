@@ -117,8 +117,6 @@ class Product(models.Model):
                     designation += ' - '
                 designation += self.title
             if self.interpreter:
-                if self.title:
-                    designation += ' '
                 designation += ', par {}'.format(self.interpreter.name)
 
         elif self.category == 'image':
