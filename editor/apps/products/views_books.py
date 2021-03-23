@@ -32,8 +32,8 @@ def book_details(request, **kwargs):
     total_charges = 0
     for index, charge in enumerate(charges):
         total_charges += charge.amount
-    cost = (total_charges / book.circulation) if book.circulation != 0 else None
-    theorical_price = (cost * book.coefficient) if book.coefficient else None
+    cost = (total_charges / book.circulation) if book.circulation != 0 else 0
+    theorical_price = (cost * book.coefficient) if book.coefficient else 0
     return render(
         request,
         'products/books/details.html',
