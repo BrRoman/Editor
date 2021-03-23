@@ -31,6 +31,7 @@ class Product(models.Model):
     )
     interpreter = models.ForeignKey(
         'Interpreter',
+        null=True,
         on_delete=models.CASCADE,
         db_column='Interprete_CD',
     )
