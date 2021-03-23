@@ -49,10 +49,6 @@
                         <td>{{ book.number_in_collection|default_if_none:'' }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold col-3">Tirage</td>
-                        <td>{{ book.circulation|default_if_none:'?' }}</td>
-                    </tr>
-                    <tr>
                         <td class="font-weight-bold col-3">Date de parution</td>
                         <td>{{ book.publication|default_if_none:'?'|date:'d/m/Y' }}</td>
                     </tr>
@@ -83,18 +79,6 @@
                 <h5 class="green font-weight-bold">Prix</h5>
                 <table class="table table-sm table-borderless mb-0">
                     <tr>
-                        <td class="font-weight-bold col-3">Prix public</td>
-                        <td>{{ book.price|default_if_none:'?' }} €</td>
-                    </tr>
-                    <tr>
-                        <td class="font-weight-bold col-3">PGHT</td>
-                        <td>{{ book.pght|default_if_none:'?' }} €</td>
-                    </tr>
-                    <tr>
-                        <td class="font-weight-bold col-3">Coefficient</td>
-                        <td>{{ book.coefficient|default_if_none:'?' }}</td>
-                    </tr>
-                    <tr>
                         <td class="font-weight-bold col-3">Charges</td>
                         <td id="charges">
                             {% for charge in charges %}
@@ -104,6 +88,34 @@
                                 </div>
                             {% endfor %}
                         </td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Total charges</td>
+                        <td>{{ total_charges|default_if_none:'?' }} €</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Tirage</td>
+                        <td>{{ book.circulation|default_if_none:'?' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Prix de revient</td>
+                        <td>{{ cost|default_if_none:'?' }} €</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Coefficient</td>
+                        <td>{{ book.coefficient|default_if_none:'?' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Prix théorique</td>
+                        <td>{{ theorical_price|default_if_none:'?' }} €</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Prix public</td>
+                        <td>{{ book.price|default_if_none:'?' }} €</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">PGHT</td>
+                        <td>{{ book.pght|default_if_none:'?' }} €</td>
                     </tr>
                 </table>
             </div>

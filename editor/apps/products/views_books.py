@@ -29,12 +29,20 @@ def book_details(request, **kwargs):
     """ Details of a book. """
     book = get_object_or_404(Product, pk=kwargs['pk'])
     charges = Charge.objects.filter(product=book)
+    total_charges = 0
+    for index, charge in enumerate(charges):
+        total_charges += charge.amount
+    cost = (total_charges / book.circulation) if book.circulation != 0 else None
+    theorical_price = (cost * book.coefficient) if book.coefficient else None
     return render(
         request,
         'products/books/details.html',
         {
             'book': book,
             'charges': charges,
+            'total_charges': total_charges,
+            'cost': '{:.2f}'.format(cost),
+            'theorical_price': '{:.2f}'.format(theorical_price),
         },
     )
 
