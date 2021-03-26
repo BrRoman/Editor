@@ -82,7 +82,6 @@ class Product(models.Model):
     pght = models.FloatField(
         db_column='PGHT',
     )
-
     recto_img = models.CharField(
         max_length=255,
         db_column='Recto_img',
