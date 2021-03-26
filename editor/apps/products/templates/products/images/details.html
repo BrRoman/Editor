@@ -7,8 +7,12 @@
 
 {% block content %}
     <h2 class="col-6 green font-weight-bold text-center">{{ image }}</h2>
-    <h6 class="col-6 green font-weight-bold text-center">{{ image.recto_img|default_if_none:'' }}</h6>
-    <h6 class="col-6 mb-4 green font-weight-bold text-center">{{ image.verso_img|default_if_none:'' }}</h6>
+    {% if image.recto_img %}
+        <h6 class="col-6 green font-weight-bold text-center">Recto : {{ image.recto_img }}</h6>
+    {% endif %}
+    {% if image.recto_img %}
+        <h6 class="col-6 mb-4 green font-weight-bold text-center">Verso : {{ image.verso_img }}</h6>
+    {% endif %}
 
     <div class="d-flex w-100 mb-3">
         <div class="col-6 d-flex flex-column">

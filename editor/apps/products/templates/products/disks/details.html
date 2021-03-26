@@ -7,10 +7,8 @@
 
 {% block content %}
     <div class="col-6 mb-3">
-        <h2 class="mb-4 green font-weight-bold text-center">{{ disk.title }}</h2>
-        {% if disk.sub_title %}
-            <h4 class="mb-4 green font-weight-bold text-center">{{ disk.sub_title }}</h4>
-        {% endif %}
+        <h2 class="mb-4 green font-weight-bold text-center">{{ disk.title|default_if_none:'' }}</h2>
+        <h4 class="mb-4 green font-weight-bold text-center">{{ disk.sub_title|default_if_none:'' }}</h4>
         {% if disk.interpreter %}
             <h6 class="mb-4 green font-weight-bold text-center">par : {{ disk.interpreter.name }}</h6>
         {% endif %}

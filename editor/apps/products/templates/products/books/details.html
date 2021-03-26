@@ -7,10 +7,8 @@
 
 {% block content %}
     <div class="col-6 mb-3">
-        <h2 class="mb-4 green font-weight-bold text-center">{{ book.title }}</h2>
-        {% if book.sub_title %}
-            <h4 class="mb-4 green font-weight-bold text-center">{{ book.sub_title }}</h4>
-        {% endif %}
+        <h2 class="mb-4 green font-weight-bold text-center">{{ book.title|default_if_none:'' }}</h2>
+        <h4 class="mb-4 green font-weight-bold text-center">{{ book.sub_title|default_if_none:'' }}</h4>
         {% if book.author %}
             <h6 class="mb-4 green font-weight-bold text-center">par : {{ book.author }}</h6>
         {% endif %}
