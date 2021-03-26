@@ -122,14 +122,6 @@ class Product(models.Model):
         elif self.category == 'image':
             if self.ref_tm:
                 designation += self.ref_tm
-            if self.recto_img:
-                if self.ref_tm:
-                    designation += ' - '
-                designation += self.recto_img
-            if self.verso_img:
-                if self.recto_img:
-                    designation += ' '
-                designation += '/ {}'.format(self.verso_img)
 
         return designation
 
