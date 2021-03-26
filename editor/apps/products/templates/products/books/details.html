@@ -1,5 +1,7 @@
 {% extends 'main.html' %}
 
+{% load static %}
+
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'products:books_list' %}>Livres</a></li>
     <li class="breadcrumb-item active">{{ book }}</li>
@@ -35,6 +37,14 @@
                         <td class="font-weight-bold col-3">EAN</td>
                         <td>{{ book.ean|default_if_none:'?' }}</td>
                     </tr>
+                    {% if book.ean %}
+                        <tr>
+                            <td></td>
+                            <td>
+                                <img src={% static barcode_path %} alt="barcode" style="width: 150px;">
+                            </td>
+                        </tr>
+                    {% endif %}
                     <tr>
                         <td class="font-weight-bold col-3">Réf. TM</td>
                         <td>{{ book.ref_tm|default_if_none:'?' }}</td>

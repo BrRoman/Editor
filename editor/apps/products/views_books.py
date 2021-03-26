@@ -1,5 +1,7 @@
 """ apps/products/views_books.py """
 
+import os
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 
@@ -28,12 +30,26 @@ def book_create(request):
 def book_details(request, **kwargs):
     """ Details of a book. """
     book = get_object_or_404(Product, pk=kwargs['pk'])
+
+    # Charges:
     charges = Charge.objects.filter(product=book)
     total_charges = 0
     for index, charge in enumerate(charges):
         total_charges += charge.amount
     cost = (total_charges / book.circulation) if book.circulation != 0 else 0
     theorical_price = (cost * book.coefficient) if book.coefficient else 0
+
+    # Barcode:
+    if book.ean:
+        if not os.path.exists('{}.png'.format(book.ean)):
+            # Create the png:
+            os.system(
+                "barcode -b {0} -e 'ean13' -u mm -g 100x50 -S -o static/img/barcodes/barcode.svg; \
+                convert static/img/barcodes/barcode.svg -transparent '#FFFFFF' -trim static/img/barcodes/{0}.png; \
+                rm static/img/barcodes/*.svg"
+                .format(book.ean)
+            )
+
     return render(
         request,
         'products/books/details.html',
@@ -43,6 +59,7 @@ def book_details(request, **kwargs):
             'total_charges': total_charges,
             'cost': '{:.2f}'.format(cost),
             'theorical_price': '{:.2f}'.format(theorical_price),
+            'barcode_path': '/img/barcodes/{}.png'.format(book.ean),
         },
     )
 

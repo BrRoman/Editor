@@ -1,5 +1,7 @@
 """ apps/products/views_images.py """
 
+import os
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 
@@ -28,11 +30,24 @@ def image_create(request):
 def image_details(request, **kwargs):
     """ Details of an image. """
     image = get_object_or_404(Product, pk=kwargs['pk'])
+
+    # Barcode:
+    if image.ean:
+        if not os.path.exists('{}.png'.format(image.ean)):
+            # Create the png:
+            os.system(
+                "barcode -b {0} -e 'ean13' -u mm -g 100x50 -S -o static/img/barcodes/barcode.svg; \
+                convert static/img/barcodes/barcode.svg -transparent '#FFFFFF' -trim static/img/barcodes/{0}.png; \
+                rm static/img/barcodes/*.svg"
+                .format(image.ean)
+            )
+
     return render(
         request,
         'products/images/details.html',
         {
             'image': image,
+            'barcode_path': '/img/barcodes/{}.png'.format(image.ean),
         },
     )
 

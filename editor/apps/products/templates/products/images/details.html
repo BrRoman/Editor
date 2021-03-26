@@ -1,5 +1,7 @@
 {% extends 'main.html' %}
 
+{% load static %}
+
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'products:images_list' %}>Images</a></li>
     <li class="breadcrumb-item active">{{ image }}</li>
@@ -31,6 +33,14 @@
                         <td class="font-weight-bold col-3">EAN</td>
                         <td>{{ image.ean|default_if_none:'?' }}</td>
                     </tr>
+                    {% if image.ean %}
+                        <tr>
+                            <td></td>
+                            <td>
+                                <img src={% static barcode_path %} alt="barcode" style="width: 150px;">
+                            </td>
+                        </tr>
+                    {% endif %}
                     <tr>
                         <td class="font-weight-bold col-3">Réf. TM</td>
                         <td>{{ image.ref_tm|default_if_none:'?' }}</td>

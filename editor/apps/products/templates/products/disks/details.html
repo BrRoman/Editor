@@ -1,5 +1,7 @@
 {% extends 'main.html' %}
 
+{% load static %}
+
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'products:disks_list' %}>CD</a></li>
     <li class="breadcrumb-item active">{{ disk }}</li>
@@ -39,6 +41,14 @@
                         <td class="font-weight-bold col-3">EAN</td>
                         <td>{{ disk.ean|default_if_none:'?' }}</td>
                     </tr>
+                    {% if disk.ean %}
+                        <tr>
+                            <td></td>
+                            <td>
+                                <img src={% static barcode_path %} alt="barcode" style="width: 150px;">
+                            </td>
+                        </tr>
+                    {% endif %}
                     <tr>
                         <td class="font-weight-bold col-3">Réf. TM</td>
                         <td>{{ disk.ref_tm|default_if_none:'?' }}</td>
