@@ -8,12 +8,22 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <div class="col-6 mb-3">
-        <h2 class="mb-4 green font-weight-bold text-center">{{ book.title|default_if_none:'' }}</h2>
-        <h4 class="mb-4 green font-weight-bold text-center">{{ book.sub_title|default_if_none:'' }}</h4>
-        {% if book.author %}
-            <h6 class="mb-4 green font-weight-bold text-center">par : {{ book.author }}</h6>
-        {% endif %}
+    <div class="d-flex justify-content-between align-items-center w-100 mb-5">
+        <div class="col-3 mr-auto">
+            <img src={% static visual_path %} alt="visual" class="border" style="width: 100px;" title="Clic droit pour enregistrer">
+        </div>
+
+        <div class="col-6">
+            <h2 class="mb-4 green font-weight-bold text-center">{{ book.title|default_if_none:'' }}</h2>
+            <h4 class="mb-4 green font-weight-bold text-center">{{ book.sub_title|default_if_none:'' }}</h4>
+            {% if book.author %}
+                <h6 class="mb-4 green font-weight-bold text-center">par : {{ book.author }}</h6>
+            {% endif %}
+        </div>
+
+        <div class="col-3 text-right" title="Clic droit pour enregistrer">
+            <img src={% static barcode_path %} alt="barcode" style="width: 150px;">
+        </div>
     </div>
 
     <div class="d-flex w-100 mb-3">
@@ -37,14 +47,6 @@
                         <td class="font-weight-bold col-3">EAN</td>
                         <td>{{ book.ean|default_if_none:'?' }}</td>
                     </tr>
-                    {% if book.ean %}
-                        <tr>
-                            <td></td>
-                            <td>
-                                <img src={% static barcode_path %} alt="barcode" style="width: 150px;">
-                            </td>
-                        </tr>
-                    {% endif %}
                     <tr>
                         <td class="font-weight-bold col-3">Réf. TM</td>
                         <td>{{ book.ref_tm|default_if_none:'?' }}</td>
@@ -52,7 +54,7 @@
                     <tr>
                         <td class="font-weight-bold col-3">Collection</td>
                         <td>
-                            {{ book.collection.collection|default_if_none:''}}
+                            {{ book.collection.name|default_if_none:''}}
                             {% if book.collection %}
                                 (ISSN {{book.collection.issn|default_if_none:''}})
                             {% endif %}

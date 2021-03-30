@@ -59,6 +59,7 @@ def disk_details(request, **kwargs):
             'total_charges': total_charges,
             'cost': '{:.2f}'.format(cost),
             'theorical_price': '{:.2f}'.format(theorical_price),
+            'visual_path': '/img/visuals/{}.jpg'.format(disk.ref_tm),
             'barcode_path': '/img/barcodes/{}.png'.format(disk.ean),
         },
     )
