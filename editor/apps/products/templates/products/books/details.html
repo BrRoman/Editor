@@ -54,7 +54,7 @@
                     <tr>
                         <td class="font-weight-bold col-3">Collection</td>
                         <td>
-                            {{ book.collection.collection|default_if_none:''}}
+                            {{ book.collection.name|default_if_none:''}}
                             {% if book.collection %}
                                 (ISSN {{book.collection.issn|default_if_none:''}})
                             {% endif %}

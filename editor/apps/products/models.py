@@ -128,7 +128,7 @@ class Product(models.Model):
 
 class Collection(models.Model):
     """ Collection model. """
-    collection = models.CharField(
+    name = models.CharField(
         max_length=255,
         db_column='Collection',
     )
