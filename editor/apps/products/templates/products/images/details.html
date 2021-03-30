@@ -42,12 +42,12 @@
                         <td>{{ image.verso_img|default_if_none:'?' }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold col-3">EAN</td>
-                        <td>{{ image.ean|default_if_none:'?' }}</td>
-                    </tr>
-                    <tr>
                         <td class="font-weight-bold col-3">Réf. TM</td>
                         <td>{{ image.ref_tm|default_if_none:'?' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">EAN</td>
+                        <td>{{ image.ean|default_if_none:'?' }}</td>
                     </tr>
                 </table>
             </div>

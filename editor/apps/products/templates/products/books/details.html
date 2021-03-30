@@ -44,12 +44,12 @@
                         <td>{{ book.author|default_if_none:'?' }}</td>
                     </tr>
                     <tr>
-                        <td class="font-weight-bold col-3">EAN</td>
-                        <td>{{ book.ean|default_if_none:'?' }}</td>
-                    </tr>
-                    <tr>
                         <td class="font-weight-bold col-3">Réf. TM</td>
                         <td>{{ book.ref_tm|default_if_none:'?' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">EAN</td>
+                        <td>{{ book.ean|default_if_none:'?' }}</td>
                     </tr>
                     <tr>
                         <td class="font-weight-bold col-3">Collection</td>
