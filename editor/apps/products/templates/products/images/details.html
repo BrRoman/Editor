@@ -8,13 +8,25 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <h2 class="col-6 green font-weight-bold text-center">{{ image }}</h2>
-    {% if image.recto_img %}
-        <h6 class="col-6 green font-weight-bold text-center">Recto : {{ image.recto_img }}</h6>
-    {% endif %}
-    {% if image.recto_img %}
-        <h6 class="col-6 mb-4 green font-weight-bold text-center">Verso : {{ image.verso_img }}</h6>
-    {% endif %}
+    <div class="d-flex justify-content-between align-items-center w-100 mb-5">
+        <div class="col-3 mr-auto">
+            <img src={% static visual_path %} alt="visual" class="border" style="width: 100px;" title="Clic droit pour enregistrer">
+        </div>
+
+        <div class="col-6">
+            <h2 class="green font-weight-bold text-center">{{ image }}</h2>
+            {% if image.recto_img %}
+                <h6 class="green font-weight-bold text-center">Recto : {{ image.recto_img }}</h6>
+            {% endif %}
+            {% if image.verso_img %}
+                <h6 class="mb-4 green font-weight-bold text-center">Verso : {{ image.verso_img }}</h6>
+            {% endif %}
+        </div>
+
+        <div class="col-3 text-right" title="Clic droit pour enregistrer">
+            <img src={% static barcode_path %} alt="barcode" style="width: 150px;">
+        </div>
+    </div>
 
     <div class="d-flex w-100 mb-3">
         <div class="col-6 d-flex flex-column">
@@ -33,14 +45,6 @@
                         <td class="font-weight-bold col-3">EAN</td>
                         <td>{{ image.ean|default_if_none:'?' }}</td>
                     </tr>
-                    {% if image.ean %}
-                        <tr>
-                            <td></td>
-                            <td>
-                                <img src={% static barcode_path %} alt="barcode" style="width: 150px;">
-                            </td>
-                        </tr>
-                    {% endif %}
                     <tr>
                         <td class="font-weight-bold col-3">Réf. TM</td>
                         <td>{{ image.ref_tm|default_if_none:'?' }}</td>

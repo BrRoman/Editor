@@ -47,6 +47,7 @@ def image_details(request, **kwargs):
         'products/images/details.html',
         {
             'image': image,
+            'visual_path': '/img/visuals/{}.jpg'.format(image.ref_tm),
             'barcode_path': '/img/barcodes/{}.png'.format(image.ean),
         },
     )
