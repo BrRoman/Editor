@@ -36,7 +36,7 @@ def disk_details(request, **kwargs):
     total_charges = 0
     for index, charge in enumerate(charges):
         total_charges += charge.amount
-    cost = (total_charges / disk.circulation) if disk.circulation != 0 else 0
+    cost = (total_charges / disk.circulation) if disk.circulation else 0
     theorical_price = (cost * disk.coefficient) if disk.coefficient else 0
 
     # Barcode:
