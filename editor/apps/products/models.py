@@ -43,7 +43,7 @@ class Product(models.Model):
     number_in_collection = models.IntegerField(
         db_column='Num_dans_collection',
     )
-    circulation = models.DateField(
+    circulation = models.IntegerField(
         db_column='Chiffre_tirage',
     )
     publication = models.DateField(
