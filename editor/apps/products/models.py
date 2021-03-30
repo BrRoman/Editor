@@ -9,13 +9,13 @@ class Product(models.Model):
         max_length=25,
         db_column='Categorie',
     )
-    ean = models.CharField(
-        max_length=13,
-        db_column='EAN',
-    )
     ref_tm = models.CharField(
         max_length=10,
         db_column='Ref_TM',
+    )
+    ean = models.CharField(
+        max_length=13,
+        db_column='EAN',
     )
     title = models.CharField(
         max_length=255,
