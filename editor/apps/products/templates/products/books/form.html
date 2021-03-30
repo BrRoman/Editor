@@ -17,4 +17,10 @@
     {% else %}
         <h2 class="mb-4 green font-weight-bold">Créer un nouveau livre</h2>
     {% endif %}
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Valider</button>
+    </form>
 {% endblock content %}

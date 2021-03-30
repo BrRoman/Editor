@@ -3,8 +3,11 @@
 import os
 
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 
+from .forms import BookForm
 from .models import Charge, Product
 
 
@@ -68,7 +71,33 @@ def book_details(request, **kwargs):
 def book_update(request, **kwargs):
     """ Update a book. """
     book = Product.objects.get(pk=kwargs['pk'])
-    return render(request, 'products/books/form.html', {'book': book})
+
+    if request.method == 'POST':
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(
+                reverse(
+                    'products:book_details',
+                    kwargs={
+                        'pk': book.pk,
+                    }
+                )
+            )
+        else:
+            print('No valid')
+
+    else:
+        form = BookForm(instance=book)
+
+    return render(
+        request,
+        'products/books/form.html',
+        {
+            'form': form,
+            'book': book,
+        }
+    )
 
 
 @login_required
