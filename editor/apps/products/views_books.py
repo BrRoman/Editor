@@ -27,7 +27,29 @@ def books_list(request):
 @login_required
 def book_create(request):
     """ Create a book. """
-    return render(request, 'products/books/form.html')
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            book = form.save()
+            return HttpResponseRedirect(
+                reverse(
+                    'products:book_details',
+                    kwargs={
+                        'pk': book.pk,
+                    }
+                )
+            )
+
+    else:
+        form = BookForm()
+
+    return render(
+        request,
+        'products/books/form.html',
+        {
+            'form': form,
+        }
+    )
 
 
 def book_details(request, **kwargs):
@@ -85,8 +107,6 @@ def book_update(request, **kwargs):
                     }
                 )
             )
-        else:
-            print('No valid')
 
     else:
         form = BookForm(instance=book)
