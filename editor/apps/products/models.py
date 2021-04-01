@@ -1,5 +1,6 @@
 """ apps/products/models.py """
 
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -42,24 +43,42 @@ class Product(models.Model):
     )
     number_in_collection = models.IntegerField(
         db_column='Num_dans_collection',
+        validators=[
+            MinValueValidator(0)
+        ],
     )
     circulation = models.IntegerField(
         db_column='Chiffre_tirage',
+        validators=[
+            MinValueValidator(0)
+        ],
     )
     publication = models.DateField(
         db_column='Date_fin_tirage',
     )
     width = models.IntegerField(
         db_column='Largeur',
+        validators=[
+            MinValueValidator(0)
+        ],
     )
     height = models.IntegerField(
         db_column='Hauteur',
+        validators=[
+            MinValueValidator(0)
+        ],
     )
     number_of_pages = models.IntegerField(
         db_column='Nb_pages',
+        validators=[
+            MinValueValidator(0)
+        ],
     )
     weight = models.IntegerField(
         db_column='Poids',
+        validators=[
+            MinValueValidator(0)
+        ],
     )
     presentation_product = models.TextField(
         db_column='Pres_objet',
@@ -73,11 +92,14 @@ class Product(models.Model):
     target_audience = models.TextField(
         db_column='Public_vise',
     )
-    price = models.FloatField(
-        db_column='Prix_public',
-    )
     coefficient = models.FloatField(
         db_column='Coefficient',
+        validators=[
+            MinValueValidator(0)
+        ],
+    )
+    price = models.FloatField(
+        db_column='Prix_public',
     )
     pght = models.FloatField(
         db_column='PGHT',
@@ -141,6 +163,9 @@ class Collection(models.Model):
         managed = False
         db_table = 'Collections'
 
+    def __str__(self):
+        return '{} (ISSN {})'.format(self.name, self.issn)
+
 
 class Interpreter(models.Model):
     """ Interpreter model. """
@@ -152,6 +177,9 @@ class Interpreter(models.Model):
     class Meta:
         managed = False
         db_table = 'Interpretes_CD'
+
+    def __str__(self):
+        return self.name
 
 
 class Charge(models.Model):
