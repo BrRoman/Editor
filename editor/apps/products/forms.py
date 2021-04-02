@@ -20,6 +20,17 @@ class BookForm(forms.ModelForm):
         required=False,
         label='Réf. TM :',
         label_suffix='',
+        help_text='Références existantes : ' +
+        ', '.join(
+            ref['ref_tm'] for ref in list(
+                Product.objects
+                .filter(category='book')
+                .filter(ref_tm__isnull=False)
+                .exclude(ref_tm='')
+                .order_by('ref_tm')
+                .values('ref_tm')
+            )
+        ),
     )
     ean = forms.CharField(
         required=False,
