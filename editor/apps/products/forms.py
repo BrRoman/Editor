@@ -10,9 +10,9 @@ from .models import Collection, Interpreter, Product
 class BookForm(forms.ModelForm):
     """ Form for Book. """
     category = forms.CharField(
-        widget=forms.TextInput(
+        widget=forms.HiddenInput(
             attrs={
-                'placeholder': 'book',
+                'value': 'book',
             }
         ),
     )
@@ -178,9 +178,9 @@ class BookForm(forms.ModelForm):
 class DiskForm(forms.ModelForm):
     """ Form for CD. """
     category = forms.CharField(
-        widget=forms.TextInput(
+        widget=forms.HiddenInput(
             attrs={
-                'placeholder': 'disk',
+                'value': 'disk',
             }
         ),
     )
@@ -262,11 +262,11 @@ class DiskForm(forms.ModelForm):
 class ImageForm(forms.ModelForm):
     """ Form for Image. """
     category = forms.CharField(
-        widget=forms.TextInput(
+        widget=forms.HiddenInput(
             attrs={
-                'placeholder': 'image',
+                'value': 'image',
             }
-        )
+        ),
     )
     ref_tm = forms.CharField(
         required=False,
