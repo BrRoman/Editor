@@ -23,7 +23,7 @@
     <form class="col-7" method="post" novalidate>
         {% csrf_token %}
 
-        {{ form.category.as_hidden }}
+        {{ form.category }}
 
         <!-- Réf. TM -->
         <div class="form-group">
@@ -49,6 +49,10 @@
                     {{ form.ref_tm.help_text }}
                 </small>
             {% endif %}
+        </div>
+
+        <div>
+            {{ list_ref_tm }}
         </div>
 
         <!-- EAN -->
