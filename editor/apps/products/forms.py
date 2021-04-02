@@ -2,6 +2,8 @@
 
 from django import forms
 
+from tempus_dominus.widgets import DatePicker
+
 from .models import Collection, Interpreter, Product
 
 
@@ -65,6 +67,12 @@ class BookForm(forms.ModelForm):
         required=False,
         label='Date de parution :',
         label_suffix='',
+        input_formats=[
+            '%d/%m/%Y',
+        ],
+        widget=DatePicker(options={
+            'format': 'DD/MM/YYYY',
+        }),
     )
     width = forms.IntegerField(
         required=False,
@@ -211,6 +219,12 @@ class DiskForm(forms.ModelForm):
         required=False,
         label='Date de parution :',
         label_suffix='',
+        input_formats=[
+            '%d/%m/%Y',
+        ],
+        widget=DatePicker(options={
+            'format': 'DD/MM/YYYY',
+        }),
     )
     weight = forms.IntegerField(
         required=False,
