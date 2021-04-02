@@ -3,6 +3,8 @@
 from django.core.validators import MinValueValidator
 from django.db import models
 
+from .validators import ean13_validator
+
 
 class Product(models.Model):
     """ Product model. """
@@ -15,8 +17,15 @@ class Product(models.Model):
         db_column='Ref_TM',
     )
     ean = models.CharField(
-        max_length=13,
+        max_length=255,
         db_column='EAN',
+        unique=True,
+        error_messages={
+            'unique': 'Ce code EAN est déjà utilisé par un autre produit.',
+        },
+        validators=[
+            ean13_validator,
+        ],
     )
     title = models.CharField(
         max_length=255,
