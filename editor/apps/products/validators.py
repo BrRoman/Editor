@@ -27,5 +27,3 @@ def ean13_validator(ean):
             le dernier digit devrait être {}).'
             .format(odd_sum, even_sum, key)
         )
-
-    return True
