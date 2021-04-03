@@ -87,7 +87,7 @@ class BookForm(forms.ModelForm):
     )
     width = forms.IntegerField(
         required=False,
-        label='Largeur :',
+        label='Largeur (mm):',
         label_suffix='',
         error_messages={
             'min_value': 'Veuillez entrer un nombre positif.',
@@ -95,7 +95,7 @@ class BookForm(forms.ModelForm):
     )
     height = forms.IntegerField(
         required=False,
-        label='Hauteur :',
+        label='Hauteur (mm):',
         label_suffix='',
         error_messages={
             'min_value': 'Veuillez entrer un nombre positif.',
@@ -111,7 +111,7 @@ class BookForm(forms.ModelForm):
     )
     weight = forms.IntegerField(
         required=False,
-        label='Poids :',
+        label='Poids (g):',
         label_suffix='',
         error_messages={
             'min_value': 'Veuillez entrer un nombre positif.',
@@ -158,6 +158,9 @@ class BookForm(forms.ModelForm):
         required=False,
         label='Prix public :',
         label_suffix='',
+        error_messages={
+            'min_value': 'Veuillez entrer un nombre positif.',
+        },
     )
 
     class Meta:
@@ -199,6 +202,17 @@ class DiskForm(forms.ModelForm):
         required=False,
         label='Réf. TM :',
         label_suffix='',
+        help_text='Références existantes : ' +
+        ', '.join(
+            ref['ref_tm'] for ref in list(
+                Product.objects
+                .filter(category='disk')
+                .filter(ref_tm__isnull=False)
+                .exclude(ref_tm='')
+                .order_by('ref_tm')
+                .values('ref_tm')
+            )
+        ),
     )
     ean = forms.CharField(
         required=False,
@@ -223,9 +237,11 @@ class DiskForm(forms.ModelForm):
     )
     circulation = forms.IntegerField(
         required=False,
-        label='Diffusion :',
+        label='Tirage :',
         label_suffix='',
-    )
+        error_messages={
+            'min_value': 'Veuillez entrer un nombre positif.',
+        },)
     publication = forms.DateField(
         required=False,
         label='Date de parution :',
@@ -239,18 +255,32 @@ class DiskForm(forms.ModelForm):
     )
     weight = forms.IntegerField(
         required=False,
-        label='Poids :',
+        label='Poids (g):',
         label_suffix='',
+        error_messages={
+            'min_value': 'Veuillez entrer un nombre positif.',
+        },
     )
     coefficient = forms.FloatField(
         required=False,
         label='Coefficient :',
         label_suffix='',
+        widget=forms.NumberInput(
+            attrs={
+                'placeholder': '6',
+            }
+        ),
+        error_messages={
+            'min_value': 'Veuillez entrer un nombre positif.',
+        },
     )
     pght = forms.FloatField(
         required=False,
         label='PGHT :',
         label_suffix='',
+        error_messages={
+            'min_value': 'Veuillez entrer un nombre positif.',
+        },
     )
 
     class Meta:
@@ -283,6 +313,17 @@ class ImageForm(forms.ModelForm):
         required=False,
         label='Réf. TM :',
         label_suffix='',
+        help_text='Références existantes : ' +
+        ', '.join(
+            ref['ref_tm'] for ref in list(
+                Product.objects
+                .filter(category='image')
+                .filter(ref_tm__isnull=False)
+                .exclude(ref_tm='')
+                .order_by('ref_tm')
+                .values('ref_tm')
+            )
+        ),
     )
     ean = forms.CharField(
         required=False,
@@ -303,18 +344,19 @@ class ImageForm(forms.ModelForm):
     )
     width = forms.IntegerField(
         required=False,
-        label='Largeur :',
+        label='Largeur (mm):',
         label_suffix='',
+        error_messages={
+            'min_value': 'Veuillez entrer un nombre positif.',
+        },
     )
     height = forms.IntegerField(
         required=False,
-        label='Hauteur :',
+        label='Hauteur (mm):',
         label_suffix='',
-    )
-    price = forms.FloatField(
-        required=False,
-        label='Prix :',
-        label_suffix='',
+        error_messages={
+            'min_value': 'Veuillez entrer un nombre positif.',
+        },
     )
 
     class Meta:
@@ -327,5 +369,4 @@ class ImageForm(forms.ModelForm):
             'verso_img',
             'width',
             'height',
-            'price',
         ]

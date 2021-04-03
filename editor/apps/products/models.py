@@ -109,9 +109,15 @@ class Product(models.Model):
     )
     price = models.FloatField(
         db_column='Prix_public',
+        validators=[
+            MinValueValidator(0)
+        ],
     )
     pght = models.FloatField(
         db_column='PGHT',
+        validators=[
+            MinValueValidator(0)
+        ],
     )
     recto_img = models.CharField(
         max_length=255,

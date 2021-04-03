@@ -3,8 +3,11 @@
 import os
 
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 
+from .forms import ImageForm
 from .models import Product
 
 
@@ -23,8 +26,30 @@ def images_list(request):
 
 @login_required
 def image_create(request):
-    """ Create a image. """
-    return render(request, 'products/images/form.html')
+    """ Create an image. """
+    if request.method == 'POST':
+        form = ImageForm(request.POST)
+        if form.is_valid():
+            image = form.save()
+            return HttpResponseRedirect(
+                reverse(
+                    'products:image_details',
+                    kwargs={
+                        'pk': image.pk,
+                    }
+                )
+            )
+
+    else:
+        form = ImageForm()
+
+    return render(
+        request,
+        'products/images/form.html',
+        {
+            'form': form,
+        }
+    )
 
 
 def image_details(request, **kwargs):
@@ -55,9 +80,33 @@ def image_details(request, **kwargs):
 
 @login_required
 def image_update(request, **kwargs):
-    """ Update a image. """
+    """ Update an image. """
     image = Product.objects.get(pk=kwargs['pk'])
-    return render(request, 'products/images/form.html', {'image': image})
+
+    if request.method == 'POST':
+        form = ImageForm(request.POST, instance=image)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(
+                reverse(
+                    'products:image_details',
+                    kwargs={
+                        'pk': image.pk,
+                    }
+                )
+            )
+
+    else:
+        form = ImageForm(instance=image)
+
+    return render(
+        request,
+        'products/images/form.html',
+        {
+            'form': form,
+            'image': image,
+        }
+    )
 
 
 @login_required
