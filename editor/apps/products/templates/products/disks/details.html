@@ -65,6 +65,16 @@
 
         <div class="col-6 d-flex flex-column">
             <div class="border border-success rounded p-2 mb-2">
+                <h5 class="green font-weight-bold">Caractéristiques physiques</h5>
+                <table class="table table-sm table-borderless mb-0">
+                    <tr>
+                        <td class="font-weight-bold col-3">Poids</td>
+                        <td>{{ disk.weight|default_if_none:'?' }} g</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="border border-success rounded p-2 mb-2">
                 <h5 class="green font-weight-bold">Prix</h5>
                 <table class="table table-sm table-borderless mb-0">
                     <tr>
@@ -97,10 +107,6 @@
                     <tr>
                         <td class="font-weight-bold col-3">Prix théorique</td>
                         <td>{{ theorical_price|default_if_none:'?' }} €</td>
-                    </tr>
-                    <tr>
-                        <td class="font-weight-bold col-3">Prix public</td>
-                        <td>{{ disk.price|default_if_none:'?' }} €</td>
                     </tr>
                     <tr>
                         <td class="font-weight-bold col-3">PGHT</td>
