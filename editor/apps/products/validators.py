@@ -18,7 +18,7 @@ def ean13_validator(ean):
     # Check the validation key:
     odd_sum = sum(int(digit) for digit in ean[0:11:2])
     even_sum = sum(int(digit) for digit in ean[1:12:2]) * 3
-    key = (odd_sum + even_sum) % 10
+    key = (10 - ((odd_sum + even_sum) % 10)) % 10
     if int(ean[12]) != key:
         raise ValidationError(
             'Code faux \
