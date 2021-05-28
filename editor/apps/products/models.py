@@ -127,6 +127,9 @@ class Product(models.Model):
         max_length=255,
         db_column='Verso_img',
     )
+    remarques = models.TextField(
+        db_column='Remarques',
+    )
 
     class Meta:
         managed = False

@@ -59,6 +59,10 @@
                         <td class="font-weight-bold col-3">Date de parution</td>
                         <td>{{ disk.publication|default_if_none:'?'|date:'d/m/Y' }}</td>
                     </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Remarques</td>
+                        <td>{{ disk.remarques|default_if_none:''|linebreaks }}</td>
+                    </tr>
                 </table>
             </div>
         </div>

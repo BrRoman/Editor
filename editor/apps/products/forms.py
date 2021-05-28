@@ -162,6 +162,12 @@ class BookForm(forms.ModelForm):
             'min_value': 'Veuillez entrer un nombre positif.',
         },
     )
+    remarques = forms.CharField(
+        required=False,
+        label='Remarques :',
+        label_suffix='',
+        widget=forms.Textarea()
+    )
 
     class Meta:
         model = Product
@@ -186,6 +192,7 @@ class BookForm(forms.ModelForm):
             'weight',
             'coefficient',
             'price',
+            'remarques',
         ]
 
 
@@ -282,6 +289,12 @@ class DiskForm(forms.ModelForm):
             'min_value': 'Veuillez entrer un nombre positif.',
         },
     )
+    remarques = forms.CharField(
+        required=False,
+        label='Remarques :',
+        label_suffix='',
+        widget=forms.Textarea()
+    )
 
     class Meta:
         model = Product
@@ -297,6 +310,7 @@ class DiskForm(forms.ModelForm):
             'weight',
             'coefficient',
             'pght',
+            'remarques',
         ]
 
 
