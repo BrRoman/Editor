@@ -69,9 +69,10 @@ def book_details(request, **kwargs):
         if not os.path.exists('{}.png'.format(book.ean)):
             # Create the png:
             os.system(
-                "barcode -b {0} -e 'ean13' -u mm -g 100x50 -S -o static/img/barcodes/barcode.svg; \
-                convert static/img/barcodes/barcode.svg -transparent '#FFFFFF' -trim static/img/barcodes/{0}.png; \
-                rm static/img/barcodes/*.svg"
+                "barcode -b {0} -e 'ean13' -u mm -g 100x50 -S -o /home/frromain/Sites/editor/editor/static/img/barcodes/barcode.svg; \
+                convert /home/frromain/Sites/editor/editor/static/img/barcodes/barcode.svg -transparent '#FFFFFF' -trim /home/frromain/Sites/editor/editor/static/img/barcodes/{0}.png; \
+                rm /home/frromain/Sites/editor/editor/static/img/barcodes/*.svg; \
+                cp /home/frromain/Sites/editor/editor/static/img/barcodes/{0}.png /home/frromain/Sites/editor/editor/static_files/img/barcodes/{0}.png"
                 .format(book.ean)
             )
 
