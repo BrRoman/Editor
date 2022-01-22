@@ -384,3 +384,23 @@ class ImageForm(forms.ModelForm):
             'width',
             'height',
         ]
+
+
+class ChargeForm(forms.ModelForm):
+    """ Form for Charges. """
+    name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'style': 'width: 250px',
+            }
+        )
+    )
+    amount = forms.FloatField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'style': 'width: 250px',
+            }
+        )
+    )

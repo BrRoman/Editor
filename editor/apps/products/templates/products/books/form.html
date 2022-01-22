@@ -1,5 +1,6 @@
 {% extends 'main.html' %}
 
+{% load static %}
 {% load widget_tweaks %}
 
 {% block breadcrumbs %}
@@ -402,6 +403,38 @@
             <div class="col-6 d-flex flex-column">
                 <div class="border border-success rounded p-2 mb-2">
                     <h5 class="green font-weight-bold">Prix</h5>
+
+                    <!-- Charges -->
+                    <table class="table table-borderless table-sm">
+                        <label class="m-0 p-0">Charges :</label>
+
+                        {{ charges_formset.management_form }}
+
+                        {% for charge_form in charges_formset.forms %}
+                            <tr class="formset_row_charge">
+                                <td class="border-0 row m-0">
+                                    <div class="d-flex">
+                                        {% for hidden in charge_form.hidden_fields %}
+                                            {{ hidden }}
+                                        {% endfor %}
+
+                                        {{ charge_form.name }}
+                                        <div class="invalid-feedback" style="display: block;">
+                                            {{ charge_form.name.errors.as_ul }}
+                                        </div>
+
+                                        {{ charge_form.amount }}
+                                        <div class="invalid-feedback" style="display: block;">
+                                            {{ charge_form.amount.errors.as_ul }}
+                                        </div>
+
+                                        <div class="ml-2">{{ charge_form.DELETE }}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+
                     <!-- Coefficient -->
                     <div class="form-group">
                         {{ form.coefficient.label_tag }}
@@ -575,3 +608,8 @@
         </div>
     </form>
 {% endblock content %}
+
+{% block javascript %}
+    <script src="{% static "js/jquery.formset.js" %}"></script>
+    <script src="{% static "js/formsets.js" %}"></script>
+{% endblock javascript %}

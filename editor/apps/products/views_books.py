@@ -2,12 +2,13 @@
 
 import os
 
+from django import forms
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from .forms import BookForm
+from .forms import BookForm, ChargeForm
 from .models import Charge, Product
 
 
@@ -95,11 +96,35 @@ def book_details(request, **kwargs):
 def book_update(request, **kwargs):
     """ Update a book. """
     book = Product.objects.get(pk=kwargs['pk'])
+    charges_inline_formset = forms.inlineformset_factory(
+        Product,
+        Charge,
+        fields=('name', 'amount'),
+        form=ChargeForm,
+        can_delete=True,
+        extra=1,
+    )
 
     if request.method == 'POST':
         form = BookForm(request.POST, instance=book)
-        if form.is_valid():
+        charges_formset = charges_inline_formset(
+            request.POST,
+            instance=book,
+        )
+        if form.is_valid() and charges_formset.is_valid():
             form.save()
+            Charge.objects.filter(product=book).delete()
+            for form_charge in charges_formset:
+                print(form_charge.cleaned_data)
+                if form_charge.cleaned_data.get('name') \
+                        and form_charge.cleaned_data.get('amount') \
+                        and not form_charge.cleaned_data.get('DELETE'):
+                    Charge.objects.create(
+                        product=book,
+                        name=form_charge.cleaned_data.get('name'),
+                        amount=form_charge.cleaned_data.get('amount'),
+                    )
+
             return HttpResponseRedirect(
                 reverse(
                     'products:book_details',
@@ -111,6 +136,9 @@ def book_update(request, **kwargs):
 
     else:
         form = BookForm(instance=book)
+        charges_formset = charges_inline_formset(
+            instance=book
+        )
 
     return render(
         request,
@@ -118,6 +146,7 @@ def book_update(request, **kwargs):
         {
             'form': form,
             'book': book,
+            'charges_formset': charges_formset,
         }
     )
 
