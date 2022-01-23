@@ -392,15 +392,21 @@ class ChargeForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control mx-1',
-                'style': 'width: 250px',
+                'style': 'color: black; width: 120px',
+                'placeholder': 'Charge',
             }
-        )
+        ),
+        label='Charge :',
+        label_suffix='',
     )
     amount = forms.FloatField(
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control mx-1',
-                'style': 'width: 100px',
+                'style': 'color: black; width: 100px',
+                'placeholder': 'Montant',
             }
-        )
+        ),
+        label='Montant :',
+        label_suffix='',
     )
